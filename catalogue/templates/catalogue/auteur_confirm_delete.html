@@ -1,0 +1,13 @@
+{% extends "catalogue/base.html" %}
+{% block title %}Supprimer un auteur{% endblock %}
+{% block content %}
+<h2>Confirmer la suppression</h2>
+<p>Voulez-vous vraiment supprimer l'auteur : <strong>{{ auteur }}</strong> ?</p>
+<p><strong>Attention :</strong> {{ nb_livres }} livre{{ nb_livres|pluralize }} de cet auteur
+sera{{ nb_livres|pluralize:",ont" }} également supprimé{{ nb_livres|pluralize }}.</p>
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Confirmer la suppression</button>
+    <a href="{% url 'catalogue:auteur_detail' auteur.pk %}">Annuler</a>
+</form>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "catalogue/base.html" %}
+{% block title %}Auteurs{% endblock %}
+{% block content %}
+<h2>Auteurs</h2>
+<p><a class="btn" href="{% url 'catalogue:auteur_create' %}">Ajouter un auteur</a></p>
+<ul>
+    {% for auteur in auteurs %}
+    <li><a href="{% url 'catalogue:auteur_detail' auteur.pk %}">{{ auteur }}</a></li>
+    {% empty %}
+    <li>Aucun auteur.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

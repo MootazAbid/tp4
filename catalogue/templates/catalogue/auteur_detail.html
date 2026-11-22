@@ -1,0 +1,20 @@
+{% extends "catalogue/base.html" %}
+{% block title %}{{ auteur }}{% endblock %}
+{% block content %}
+<h2>{{ auteur }}</h2>
+<p><strong>E-mail :</strong> {{ auteur.email }}</p>
+<p><strong>Inscrit le :</strong> {{ auteur.joined_date }}</p>
+<h3>Livres</h3>
+<ul>
+    {% for livre in livres %}
+    <li><a href="{% url 'catalogue:livre_detail' livre.pk %}">{{ livre.title }}</a></li>
+    {% empty %}
+    <li>Aucun livre.</li>
+    {% endfor %}
+</ul>
+<p>
+    <a href="{% url 'catalogue:auteur_update' auteur.pk %}">Modifier</a> |
+    <a href="{% url 'catalogue:auteur_delete' auteur.pk %}">Supprimer</a> |
+    <a href="{% url 'catalogue:auteur_list' %}">Retour</a>
+</p>
+{% endblock %}

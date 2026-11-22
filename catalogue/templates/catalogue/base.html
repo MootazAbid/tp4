@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Ma bibliothèque{% endblock %}</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        nav { background: #eee; padding: 12px; }
+        nav a { margin-right: 14px; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background: #f2f2f2; }
+        .messages { list-style: none; padding: 0; }
+        .messages li { padding: 8px; margin: 10px 0; border-radius: 4px; }
+        .messages .success { background: #d4edda; color: #155724; }
+        .messages .error { background: #f8d7da; color: #721c24; }
+        .errorlist { color: #b00020; }
+    </style>
+</head>
+<body>
+    <h1>Ma bibliothèque</h1>
+    <nav>
+        <a href="{% url 'catalogue:livre_list' %}">Livres</a>
+        <a href="{% url 'catalogue:auteur_list' %}">Auteurs</a>
+        <a href="{% url 'catalogue:categorie_list' %}">Catégories</a>
+        <a href="{% url 'catalogue:livre_create' %}">Ajouter un livre</a>
+    </nav>
+    <main>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

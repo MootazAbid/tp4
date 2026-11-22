@@ -1,0 +1,15 @@
+{% extends "catalogue/base.html" %}
+{% block title %}{{ livre.title }}{% endblock %}
+{% block content %}
+<h2>{{ livre.title }}</h2>
+<p><strong>Auteur :</strong> <a href="{% url 'catalogue:auteur_detail' livre.author.pk %}">{{ livre.author }}</a></p>
+<p><strong>Catégorie :</strong> {{ livre.category }}</p>
+<p><strong>Date de publication :</strong> {{ livre.publication_date }}</p>
+<p><strong>Prix :</strong> {{ livre.price }} TND</p>
+<p>{{ livre.summary }}</p>
+<p>
+    <a href="{% url 'catalogue:livre_update' livre.pk %}">Modifier</a> |
+    <a href="{% url 'catalogue:livre_delete' livre.pk %}">Supprimer</a> |
+    <a href="{% url 'catalogue:livre_list' %}">Retour à la liste</a>
+</p>
+{% endblock %}

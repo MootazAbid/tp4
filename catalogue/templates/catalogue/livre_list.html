@@ -1,0 +1,29 @@
+{% extends "catalogue/base.html" %}
+{% block title %}Catalogue des livres{% endblock %}
+{% block content %}
+<p><a class="btn" href="{% url 'catalogue:livre_create' %}">Ajouter un livre</a></p>
+<h2>Catalogue des livres</h2>
+
+<form method="get">
+    <input type="text" name="q" value="{{ q }}" placeholder="Rechercher un titre...">
+    <button type="submit">Rechercher</button>
+</form>
+
+<table>
+    <tr><th>Titre</th><th>Auteur</th><th>Prix (TND)</th><th>Détails</th><th>Actions</th></tr>
+    {% for livre in livres %}
+    <tr>
+        <td>{{ livre.title }}</td>
+        <td>{{ livre.author }}</td>
+        <td>{{ livre.price }}</td>
+        <td><a href="{% url 'catalogue:livre_detail' livre.pk %}">Consulter</a></td>
+        <td>
+            <a href="{% url 'catalogue:livre_update' livre.pk %}">Modifier</a> |
+            <a href="{% url 'catalogue:livre_delete' livre.pk %}">Supprimer</a>
+        </td>
+    </tr>
+    {% empty %}
+    <tr><td colspan="5">Aucun livre trouvé.</td></tr>
+    {% endfor %}
+</table>
+{% endblock %}
